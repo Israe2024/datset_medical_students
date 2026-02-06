@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prédiction de Diabetes</title>
+</head>
+<body>
+    <h1>📝Formulaire de Prédiction</h1>
+
+    <!-- إضافة الصورة -->
+    <img src="{{ url_for('static', filename='Capture d'écran 2025-05-08 144835.png') }}" alt="Image description" width="500"><br><br>
+
+    <!-- الفورم كيدوز البيانات للسيرفر عبر POST -->
+    <form method="POST" action="/predict">
+
+        Age: <input type="text" name="Age" required><br><br>
+        Genre:
+        <input type="radio" name="Gender" value="Male" required>Homme
+        <input type="radio" name="Gender" value="Female">Femme<br><br>
+        Weight:
+        <input type="number" name="Weight" required><br><br>
+        BMI: 
+        <input type="number" name="BMI" min="10.18" max="44.29" required><br><br>
+
+        Temperature:
+        <input type="number" name="Temperature" min="96.755" max="100.45" required><br><br>
+
+        Heart_Rate:
+        <input type="number" name="Heart_Rate" min="60.0" max="99.0" required><br><br>
+
+        Cholesterol:
+        <input type="number" name="Cholesterol" min="120.0" max="249.0" required><br><br>
+
+        Smoking:
+        <input type="radio" name="Smoking" value="1" required> Oui
+        <input type="radio" name="Smoking" value="0"> Non<br><br>
+
+        <!-- زر الإرسال -->
+        <input type="submit" value="Prédire">
+
+    </form>
+
+    <!-- عرض النتيجة إذا كانت موجودة -->
+    {% if prediction is defined %}
+        <h2>Résultat de la prédiction :</h2>
+        {% if prediction == 1 %}
+            ❌ L'étudiant est *malade* (diabétique).
+        {% else %}
+            ✅ Le client n'est *pas malade* (pas diabétique).
+        {% endif %}
+    {% endif %}
+</body>
+</html>
